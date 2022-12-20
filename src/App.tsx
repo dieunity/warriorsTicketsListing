@@ -6,7 +6,7 @@ import { Fab } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
 
 export default function App() {
-  const ref = useRef(null);
+  const ref = useRef<null | HTMLDivElement>(null);
   const handleScroll = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -15,14 +15,14 @@ export default function App() {
     image: {
       height: "auto",
       width: "100%",
-      cursor: "pointer"
+      cursor: "pointer",
     },
     fabStyle: {
       position: "fixed",
       bottom: "2em",
       right: "10%",
-      color: "blue"
-    }
+      color: "blue",
+    },
   };
   return (
     <div className="App">
@@ -61,8 +61,11 @@ export default function App() {
         Feel free to browse the tickets available below, or subscribe to my
         listserv for updates (like when playoffs come around!)
       </p>
-      <Main forwardRef={ref} handleScroll={handleScroll} />
-      <Fab variant="extended" style={style.fabStyle}>
+      <Main
+        // handleScroll={handleScroll}
+        ref={ref}
+      />
+      <Fab variant="extended" sx={{ ...style.fabStyle }}>
         <NavigationIcon sx={{ mr: 1 }} />
         <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
           Contact Me

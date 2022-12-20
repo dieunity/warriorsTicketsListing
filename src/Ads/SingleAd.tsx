@@ -54,7 +54,7 @@ export const SingleAd = () => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {headers.map((header, idx) => (
+                {headers.map((header: string, idx: number) => (
                   <TableCell key={idx}>{header}</TableCell>
                 ))}
               </TableRow>
@@ -65,7 +65,7 @@ export const SingleAd = () => {
                   key={idx}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  {row.map((cell, idx) => (
+                  {row.map((cell: string, idx: number) => (
                     <TableCell align="right" key={idx}>
                       {cell}
                     </TableCell>

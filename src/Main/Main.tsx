@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, forwardRef } from "react";
 import lowerLevelImage from "../assets/Warriors section 109.png";
 import upperLevelImage from "../assets/Section 216 row 12 3D.png";
 import Loading from "./Loading";
@@ -8,36 +8,41 @@ const ListServeEmbed = lazy(() => import("../ListServe/ListServeEmbed"));
 
 const inlineStyle = {
   adSpace: {
-    marginTop: "3em"
+    marginTop: "3em",
   },
   page: {
-    margin: "5% 5% 25%"
+    margin: "5% 5% 25%",
   },
   pictureAndLink: {
     margin: "2em",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   buttonsContainer: {
     display: "flex",
     gap: "5%",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   imageButton: {
     cursor: "pointer",
-    width: "100%"
+    width: "100%",
   },
   image: {
     width: "35vw",
-    height: "100%"
+    height: "100%",
   },
   section: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 };
 
-export const Main = ({ forwardRef, handleScroll }) => {
+type Props = {
+  ref: HTMLDivElement | null
+  handleScroll: () => void;
+};
+
+export const Main = forwardRef<HTMLDivElement>((props, ref) => {
   const [page, setPage] = useState("priceView");
 
   type renderObject = {
@@ -68,18 +73,18 @@ export const Main = ({ forwardRef, handleScroll }) => {
 
   const render: renderObject = {
     priceView: <EmbeddedTable />,
-    subscribe: <ListServeEmbed />
+    subscribe: <ListServeEmbed />,
   };
 
   return (
     <div style={inlineStyle.page}>
       <div style={inlineStyle.buttonsContainer}>
-        <div style={inlineStyle.section}>
+        <div style={inlineStyle.section as React.CSSProperties}>
           <h4>Section 109, row 10</h4>
           <button
             onClick={() => {
               setPage("priceView");
-              handleScroll();
+              // handleScroll();
             }}
             style={inlineStyle.imageButton}
           >
@@ -90,12 +95,12 @@ export const Main = ({ forwardRef, handleScroll }) => {
             />
           </button>
         </div>
-        <div style={inlineStyle.section}>
+        <div style={inlineStyle.section as React.CSSProperties}>
           <h4>Section 216, row 11</h4>
           <button
             onClick={() => {
               setPage("priceView");
-              handleScroll();
+              // handleScroll();
             }}
             style={inlineStyle.imageButton}
           >
@@ -108,7 +113,7 @@ export const Main = ({ forwardRef, handleScroll }) => {
         </div>
       </div>
       <div className="selectbar">
-        <div ref={forwardRef}>
+        <div ref={ref}>
           <label>I would like to </label>
           <select
             name="actions"
@@ -135,4 +140,4 @@ export const Main = ({ forwardRef, handleScroll }) => {
       </div> */}
     </div>
   );
-};
+})

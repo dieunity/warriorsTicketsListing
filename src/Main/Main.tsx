@@ -5,6 +5,7 @@ import Loading from "./Loading";
 
 const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
 const ListServeEmbed = lazy(() => import("../ListServe/ListServeEmbed"));
+const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
   embeddedAdSpace: {
@@ -41,7 +42,8 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
 
   const render: renderObject = {
     priceView: <EmbeddedTable />,
-    subscribe: <ListServeEmbed />,
+    subscribe: <SendinblueForm />,
+    // subscribe: <ListServeEmbed />,
   };
 
   return (

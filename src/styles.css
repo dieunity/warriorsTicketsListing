@@ -4,6 +4,7 @@
   font-family: Helvetica Neue;
   text-align: center;
   flex: 1 1 auto;
+  min-width: 550px; 
 }
 
 h1 {

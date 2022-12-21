@@ -37,7 +37,6 @@ const inlineStyle = {
   },
 };
 
-
 export const Main = forwardRef<HTMLDivElement>((props, ref) => {
   const [page, setPage] = useState("priceView");
 

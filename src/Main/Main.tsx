@@ -7,33 +7,28 @@ const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
 const ListServeEmbed = lazy(() => import("../ListServe/ListServeEmbed"));
 
 const inlineStyle = {
-  adSpace: {
+  embeddedAdSpace: {
     marginTop: "3em",
   },
   page: {
     margin: "5% 5% 25%",
-  },
-  pictureAndLink: {
-    margin: "2em",
-    display: "flex",
-    flexDirection: "column",
   },
   buttonsContainer: {
     display: "flex",
     gap: "5%",
     justifyContent: "center",
   },
-  imageButton: {
-    cursor: "pointer",
-    width: "100%",
-  },
-  image: {
-    width: "35vw",
-    height: "100%",
-  },
   section: {
     display: "flex",
     flexDirection: "column",
+  },
+  imageButton: {
+    cursor: "pointer",
+    width: "35vw",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
   },
 };
 
@@ -43,28 +38,6 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
   type renderObject = {
     [key: string]: JSX.Element;
   };
-
-  // <div style={inlineStyle.pictureAndLink}>
-  //       <a
-  //         href="https://sfbay.craigslist.org/sfc/tix/d/san-francisco-warriors-tickets-celtics/7546536351.html"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //         style={inlineStyle.image}
-  //       >
-  //         <img
-  //           src="https://images.craigslist.org/00T0T_eJ1YN8TQJ3Iz_0CI0mE_1200x900.jpg"
-  //           alt="Section 216 3D render"
-  //           style={inlineStyle.image}
-  //         />
-  //       </a>
-  //       <a
-  //         href="https://sfbay.craigslist.org/sfc/tix/d/san-francisco-warriors-tickets-celtics/7546536351.html"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Craigslist Section 109, row 10
-  //       </a>
-  //     </div>
 
   const render: renderObject = {
     priceView: <EmbeddedTable />,
@@ -127,12 +100,8 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
         </div>
       </div>
       <Suspense fallback={<Loading />}>
-        <div style={inlineStyle.adSpace}>{render[page]}</div>
+        <div style={inlineStyle.embeddedAdSpace}>{render[page]}</div>
       </Suspense>
-
-      {/* <div style={inlineStyle.adSpace}>
-        <SingleAd />
-      </div> */}
     </div>
   );
 })

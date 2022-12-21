@@ -37,10 +37,6 @@ const inlineStyle = {
   },
 };
 
-type Props = {
-  ref: HTMLDivElement | null
-  handleScroll: () => void;
-};
 
 export const Main = forwardRef<HTMLDivElement>((props, ref) => {
   const [page, setPage] = useState("priceView");

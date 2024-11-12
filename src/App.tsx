@@ -1,6 +1,6 @@
 import "./styles.css";
 import { Main } from "./Main/Main";
-import warriorsBanner from "./assets/Warriors championship banner.jpeg";
+import warriors2024 from "./assets/warriors2024-2025.jpg";
 import { useRef } from "react";
 import { Fab } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
@@ -29,26 +29,27 @@ export default function App() {
       {/* <h1>Warriors tickets</h1> */}
       <img
         style={style.image}
-        src={warriorsBanner}
+        src={warriors2024}
         alt="Warriors championship banner"
         onClick={handleScroll}
       />
-      <h2>Catch the 2022-2023 Warriors Championship run!</h2>
+      <h1>Warriors 2024-2025! We da Championship!</h1>
       <p className="paragraph">
-        For 11 years, I've put up tickets for sale to Warriors fans who want an
+        Since 2011, I've put up tickets for sale to Warriors fans who want an
         affordable, awesome Warriors experience first at Oracle Arena, and now
         at Chase Center. I've followed the rise of the Warriors dynastic core,
         from when David Lee went down and Draymond got his first chance to
         start, to when Iggy and KD both decided to join the up and coming
-        Warriors.
+        Warriors. What an era.
       </p>
       <p className="paragraph">
-        This year, the Warriors are at the top again after a defiant 2021-2022
-        run and winning the 4th championship out of 6 Finals appearances in 8
-        years. It'll be Andre Iguodala's last year. Potentially the final year
-        of the Curry/Klay/Draymond era. It is also potentially the first year of
-        All-Star Poole, DPOY Andrew Wiggins, and a full season for James Wiseman
-        & Kuminga playing alongside each other.
+        All in all, the Dubs took home the 4th championship out of 6 Finals
+        appearances in 8 years. Klay's now in a Mavs uniform, KD on the Suns,
+        Iggy onto brighter business ventures. The Warriors with new GM Mike
+        Dunleavy have made many underrated moves that is bringing them back to
+        the Western Conference! With Steph, Draymond, Loon locked into contracts
+        for a few more years, and with the rest of the team, the Warriors are
+        now a force to be reckoned with.
       </p>
       <p className="paragraph">
         Email me at{" "}
@@ -62,7 +63,6 @@ export default function App() {
         listserv for updates (like when playoffs come around!)
       </p>
       <Main
-        // handleScroll={handleScroll}
         ref={ref}
       />
       <Fab variant="extended" sx={{ ...style.fabStyle }}>

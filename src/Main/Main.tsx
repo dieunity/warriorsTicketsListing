@@ -1,14 +1,13 @@
 import { useState, lazy, Suspense, forwardRef } from "react";
 import lowerLevelImage from "../assets/Warriors section 109.png";
 import Loading from "./Loading";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
 const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
-  embeddedAdSpace: {
-    marginTop: "3em",
-  },
   page: {
     margin: "5% 5% 25%",
   },
@@ -23,7 +22,7 @@ const inlineStyle = {
   },
   imageButton: {
     cursor: "pointer",
-    width: "35vw",
+    width: "55vw",
   },
   image: {
     width: "100%",
@@ -43,11 +42,17 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
     subscribe: <SendinblueForm />,
   };
 
+  const handlePageChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newPage: string
+  ) => {
+    setPage(newPage);
+  };
+
   return (
     <div style={inlineStyle.page}>
       <div style={inlineStyle.buttonsContainer}>
         <div style={inlineStyle.section as React.CSSProperties}>
-          <h4>Section 109, row 10</h4>
           <button
             onClick={() => {
               setPage("priceView");
@@ -60,30 +65,30 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
               style={inlineStyle.image}
             />
           </button>
+          <h4>View from Section 109, row 10</h4>
         </div>
       </div>
-      <div className="selectbar">
+      <div>
         <div ref={ref}>
-          <label>I would like to </label>
-          <select
-            name="actions"
-            id="actions"
-            onChange={(e) => {
-              setPage(e.target.value);
-            }}
+          <ToggleButtonGroup
             value={page}
+            exclusive
+            onChange={handlePageChange}
+            aria-label="subscribeOrPriceView"
+            className="toggle-group"
           >
-            <option value="default" disabled>
-              Select your option
-            </option>
-            <option value="priceView">See available tickets price</option>
-            <option value="subscribe">subscribe to email listserve</option>
-          </select>
+            <ToggleButton value="priceView" aria-label="priceView">
+              See available tickets price
+            </ToggleButton>
+            <ToggleButton value="subscribe" aria-label="subscribe">
+              subscribe to email listserve
+            </ToggleButton>
+          </ToggleButtonGroup>
         </div>
       </div>
       <Suspense fallback={<Loading />}>
-        <div style={inlineStyle.embeddedAdSpace}>{render[page]}</div>
+        <div>{render[page]}</div>
       </Suspense>
     </div>
   );
-})
+});

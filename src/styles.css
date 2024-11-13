@@ -4,7 +4,7 @@
   font-family: Helvetica Neue;
   text-align: center;
   flex: 1 1 auto;
-  min-width: 550px; 
+  min-width: 550px;
 }
 
 h1 {
@@ -15,10 +15,15 @@ h4 {
   margin: 0.5em;
 }
 
-.select-bar {
-  margin: 4em 0 2em;
+.toggle-group {
+  margin: 4em 0 1em;
   padding-top: 3em;
-  font-weight: bold;
+}
+
+.link-style {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 /* 
 .select {

@@ -45,7 +45,7 @@ export default function App() {
       <p className="paragraph">
         All in all, the Dubs took home the 4th championship out of 6 Finals
         appearances in 8 years. Klay's now in a Mavs uniform, KD on the Suns,
-        Iggy onto brighter business ventures. The Warriors with new GM Mike
+        Iggy onto brighte r business ventures. The Warriors with new GM Mike
         Dunleavy have made many underrated moves that is bringing them back to
         the Western Conference! With Steph, Draymond, Loon locked into contracts
         for a few more years, and with the rest of the team, the Warriors are

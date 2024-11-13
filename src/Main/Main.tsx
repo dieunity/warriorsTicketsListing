@@ -1,10 +1,8 @@
 import { useState, lazy, Suspense, forwardRef } from "react";
 import lowerLevelImage from "../assets/Warriors section 109.png";
-import upperLevelImage from "../assets/Section 216 row 12 3D.png";
 import Loading from "./Loading";
 
 const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
-const ListServeEmbed = lazy(() => import("../ListServe/ListServeEmbed"));
 const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
@@ -43,7 +41,6 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
   const render: renderObject = {
     priceView: <EmbeddedTable />,
     subscribe: <SendinblueForm />,
-    // subscribe: <ListServeEmbed />,
   };
 
   return (
@@ -54,29 +51,12 @@ export const Main = forwardRef<HTMLDivElement>((props, ref) => {
           <button
             onClick={() => {
               setPage("priceView");
-              // handleScroll();
             }}
             style={inlineStyle.imageButton}
           >
             <img
               src={lowerLevelImage}
               alt="Section 109 3D render"
-              style={inlineStyle.image}
-            />
-          </button>
-        </div>
-        <div style={inlineStyle.section as React.CSSProperties}>
-          <h4>Section 216, row 11</h4>
-          <button
-            onClick={() => {
-              setPage("priceView");
-              // handleScroll();
-            }}
-            style={inlineStyle.imageButton}
-          >
-            <img
-              src={upperLevelImage}
-              alt="Section 216 3D render"
               style={inlineStyle.image}
             />
           </button>

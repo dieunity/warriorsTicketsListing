@@ -15,8 +15,9 @@ h4 {
   margin: 0.5em;
 }
 
-.selectbar {
+.select-bar {
   margin: 4em 0 2em;
+  padding-top: 3em;
   font-weight: bold;
 }
 /* 

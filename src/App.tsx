@@ -59,12 +59,13 @@ export default function App() {
         , or text me directly if you have my number to get your tickets!
       </p>
       <p className="paragraph">
-        Feel free to browse the tickets available below, or subscribe to my
-        listserv for updates (like when playoffs come around!)
+        Feel free to browse the tickets available below, or{" "}
+        <text onClick={handleScroll} role="button" className="link-style">
+          subscribe
+        </text>{" "}
+        to my listserv for updates (like when playoffs come around!)
       </p>
-      <Main
-        ref={ref}
-      />
+      <Main ref={ref} />
       <Fab variant="extended" sx={{ ...style.fabStyle }}>
         <NavigationIcon sx={{ mr: 1 }} />
         <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">

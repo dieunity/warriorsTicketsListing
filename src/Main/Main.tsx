@@ -30,65 +30,70 @@ const inlineStyle = {
   },
 };
 
-export const Main = forwardRef<HTMLDivElement>((props, ref) => {
-  const [page, setPage] = useState("priceView");
+type MainProps = {
+  page: string;
+  setPage: React.Dispatch<React.SetStateAction<string>>;
+};
 
-  type renderObject = {
-    [key: string]: JSX.Element;
-  };
+export const Main = forwardRef<HTMLDivElement, MainProps>(
+  ({ page, setPage }, ref) => {
+    type renderObject = {
+      [key: string]: JSX.Element;
+    };
 
-  const render: renderObject = {
-    priceView: <EmbeddedTable />,
-    subscribe: <SendinblueForm />,
-  };
+    const render: renderObject = {
+      priceView: <EmbeddedTable />,
+      subscribe: <SendinblueForm />,
+    };
 
-  const handlePageChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newPage: string
-  ) => {
-    setPage(newPage);
-  };
+    const handlePageChange = (
+      event: React.MouseEvent<HTMLElement>,
+      newPage: string
+    ) => {
+      setPage(newPage);
+    };
 
-  return (
-    <div style={inlineStyle.page}>
-      <div style={inlineStyle.buttonsContainer}>
-        <div style={inlineStyle.section as React.CSSProperties}>
-          <button
-            onClick={() => {
-              setPage("priceView");
-            }}
-            style={inlineStyle.imageButton}
-          >
-            <img
-              src={lowerLevelImage}
-              alt="Section 109 3D render"
-              style={inlineStyle.image}
-            />
-          </button>
-          <h4>View from Section 109, row 10</h4>
+    return (
+      <div style={inlineStyle.page}>
+        <div style={inlineStyle.buttonsContainer}>
+          <div style={inlineStyle.section as React.CSSProperties}>
+            <button
+              onClick={() => {
+                setPage("priceView");
+              }}
+              style={inlineStyle.imageButton}
+            >
+              <img
+                src={lowerLevelImage}
+                alt="Section 109 3D render"
+                style={inlineStyle.image}
+              />
+            </button>
+            <h4>View from Section 109, row 10</h4>
+          </div>
         </div>
-      </div>
-      <div>
-        <div ref={ref}>
-          <ToggleButtonGroup
-            value={page}
-            exclusive
-            onChange={handlePageChange}
-            aria-label="subscribeOrPriceView"
-            className="toggle-group"
-          >
-            <ToggleButton value="priceView" aria-label="priceView">
-              See available tickets price
-            </ToggleButton>
-            <ToggleButton value="subscribe" aria-label="subscribe">
-              subscribe to email listserve
-            </ToggleButton>
-          </ToggleButtonGroup>
+        <div>
+          <div ref={ref}>
+            <ToggleButtonGroup
+              value={page}
+              exclusive
+              onChange={handlePageChange}
+              aria-label="subscribeOrPriceView"
+              className="toggle-group"
+            >
+              <ToggleButton value="priceView" aria-label="priceView">
+                See available tickets price
+              </ToggleButton>
+              <ToggleButton value="subscribe" aria-label="subscribe">
+                subscribe to email listserve
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
         </div>
+        <Suspense fallback={<Loading />}>
+          <div>{render[page]}</div>
+        </Suspense>
       </div>
-      <Suspense fallback={<Loading />}>
-        <div>{render[page]}</div>
-      </Suspense>
-    </div>
-  );
-});
+    );
+  }
+);

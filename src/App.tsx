@@ -1,14 +1,21 @@
 import "./styles.css";
 import { Main } from "./Main/Main";
 import warriors2024 from "./assets/warriors2024-2025.jpg";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Fab } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
 
 export default function App() {
   const ref = useRef<null | HTMLDivElement>(null);
+  const [page, setPage] = useState("priceView");
+
   const handleScroll = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubscribe = () => {
+    setPage("subscribe");
+    handleScroll();
   };
 
   const style = {
@@ -60,12 +67,12 @@ export default function App() {
       </p>
       <p className="paragraph">
         Feel free to browse the tickets available below, or{" "}
-        <text onClick={handleScroll} role="button" className="link-style">
+        <button onClick={handleSubscribe} className="button-as-link">
           subscribe
-        </text>{" "}
+        </button>{" "}
         to my listserv for updates (like when playoffs come around!)
       </p>
-      <Main ref={ref} />
+      <Main ref={ref} page={page} setPage={setPage} />
       <Fab variant="extended" sx={{ ...style.fabStyle }}>
         <NavigationIcon sx={{ mr: 1 }} />
         <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">

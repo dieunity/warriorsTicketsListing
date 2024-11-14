@@ -20,11 +20,16 @@ h4 {
   padding-top: 3em;
 }
 
-.link-style {
+.button-as-link {
+  background: none;
+  border: none;
+  padding: 0;
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+  font: inherit;
 }
+
 /* 
 .select {
   font-size: larger;

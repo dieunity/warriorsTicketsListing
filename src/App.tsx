@@ -1,9 +1,10 @@
 import "./styles.css";
-import { Main } from "./Main/Main";
+import { Main } from "./pages/Main/Main";
 import warriors2024 from "./assets/warriors2024-2025.jpg";
 import { useRef, useState } from "react";
 import { Fab } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
+import MailIcon from "@mui/icons-material/Mail";
 
 export default function App() {
   const ref = useRef<null | HTMLDivElement>(null);
@@ -29,11 +30,11 @@ export default function App() {
       bottom: "2em",
       right: "10%",
       color: "blue",
+      backgroundColor: "yellow",
     },
   };
   return (
     <div className="App">
-      {/* <h1>Warriors tickets</h1> */}
       <img
         style={style.image}
         src={warriors2024}
@@ -74,7 +75,7 @@ export default function App() {
       </p>
       <Main ref={ref} page={page} setPage={setPage} />
       <Fab variant="extended" sx={{ ...style.fabStyle }}>
-        <NavigationIcon sx={{ mr: 1 }} />
+        <MailIcon sx={{ mr: 1 }} />
         <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
           Contact Me
         </a>

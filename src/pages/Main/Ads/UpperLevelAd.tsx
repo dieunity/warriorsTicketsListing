@@ -1,8 +1,7 @@
-import "../styles.css";
-import { mockDataLowerLevel } from "../mockData/mockData";
+import { mockDataUpperLevel } from "../../../assets/mockData/mockData";
 
-export const LowerLevelAd = () => {
-  const Listings = mockDataLowerLevel.map((game, idx) => {
+export const UpperLevelAd = () => {
+  const Listings = mockDataUpperLevel.map((game, idx) => {
     return (
       <p className="paragraph" key={idx}>
         {game.data}
@@ -13,11 +12,11 @@ export const LowerLevelAd = () => {
   return (
     <div>
       <p className="paragraph">
-        This is the listing for my lower level tickets at section 109, row 10!
-        Some may say close enough to affect free throws :)
+        This is the listing for my upper level tickets at section 216, row 11
+        (actual 2nd row don't worry about tall people blocking your view)!
       </p>
       <p className="paragraph">
-        Note: Prices are per ticket (starting at $199/ticket). Will not sell
+        Note: Prices are per ticket (starting at $89/ticket). Will not sell
         individual tickets.
       </p>
       <p className="paragraph">

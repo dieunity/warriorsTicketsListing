@@ -1,11 +1,11 @@
-import { useState, lazy, Suspense, forwardRef } from "react";
-import lowerLevelImage from "../assets/Warriors section 109.png";
+import { lazy, Suspense, forwardRef } from "react";
+import lowerLevelImage from "../../assets/Warriors section 109.png";
 import Loading from "./Loading";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
-const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
+const EmbeddedTable = lazy(() => import("./Ads/EmbeddedTable"));
+const SendinblueForm = lazy(() => import("./ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
   page: {
@@ -23,8 +23,12 @@ const inlineStyle = {
   imageButton: {
     cursor: "pointer",
     width: "55vw",
+    background: "none",
+    border: "none",
+    boxShadow: "2px",
   },
   image: {
+    padding: 0,
     width: "100%",
     height: "100%",
   },

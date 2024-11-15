@@ -8,10 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { formatDate, formatTime } from "../../utils/dayjs";
 
 interface Data {
   date: any;
-  time: number | null;
+  time: string | null;
   opponent: string;
   price: any;
   is_sold: boolean;
@@ -24,7 +25,8 @@ const TicketTable = () => {
   const fetchTickets = async () => {
     const { data, error } = await supabase
       .from("tickets")
-      .select("date, time, opponent, price, is_sold");
+      .select("date, time, opponent, price, is_sold")
+      .order("date", { ascending: true });
     if (error) {
       console.error("Error fetching tickets:", error);
     } else {
@@ -46,7 +48,6 @@ const TicketTable = () => {
         Price is per ticket. I have 3 tickets available at section 109, row 10
       </Typography>
 
-
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (
@@ -62,15 +63,27 @@ const TicketTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tickets.map((ticket, index) => (
-                <TableRow key={index}>
-                  <TableCell>{ticket.date}</TableCell>
-                  <TableCell>{ticket.time ? ticket.time : "TBD"}</TableCell>
-                  <TableCell>{ticket.opponent}</TableCell>
-                  <TableCell>${ticket.price}</TableCell>
-                  <TableCell>{ticket.is_sold ? "Sold" : "Available"}</TableCell>
-                </TableRow>
-              ))}
+              {tickets.map((ticket, index) => {
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      backgroundColor: ticket.is_sold ? "grey.200" : "white",
+                      opacity: ticket.is_sold ? 0.6 : 1,
+                    }}
+                  >
+                    <TableCell>{formatDate(ticket.date)}</TableCell>
+                    <TableCell>
+                      {ticket.time ? formatTime(ticket.time) : "TBD"}
+                    </TableCell>
+                    <TableCell>{ticket.opponent}</TableCell>
+                    <TableCell>${ticket.price}</TableCell>
+                    <TableCell>
+                      {ticket.is_sold ? "Sold" : "Available"}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>

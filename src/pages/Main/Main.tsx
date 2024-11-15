@@ -1,6 +1,6 @@
 import { lazy, Suspense, forwardRef, useState } from "react";
 import lowerLevelImage from "../../assets/Warriors section 109.png";
-import Loading from "../Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ImageModal from "../Modals/ImageModal";

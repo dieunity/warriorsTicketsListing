@@ -9,11 +9,18 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
+interface Data {
+  date: any;
+  time: number | null;
+  opponent: string;
+  price: any;
+  is_sold: boolean;
+}
+
 const TicketTable = () => {
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState<Data[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch tickets from the Supabase database
   const fetchTickets = async () => {
     const { data, error } = await supabase
       .from("tickets")
@@ -21,7 +28,7 @@ const TicketTable = () => {
     if (error) {
       console.error("Error fetching tickets:", error);
     } else {
-      setTickets(data);
+      setTickets(data ?? []);
     }
     setLoading(false);
   };
@@ -33,8 +40,12 @@ const TicketTable = () => {
   return (
     <div style={{ padding: "20px" }}>
       <Typography variant="h4" gutterBottom>
-        Game Tickets
+        Tickets Prices
       </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        Price is per ticket. I have 3 tickets available at section 109, row 10
+      </Typography>
+
 
       {loading ? (
         <Typography>Loading...</Typography>

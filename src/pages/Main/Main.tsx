@@ -6,6 +6,8 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ImageModal from "../Modals/ImageModal";
 
 const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
+const TicketTable = lazy(() => import("../TicketsTable/TicketsTable"));
+
 const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
@@ -49,7 +51,7 @@ export const Main = forwardRef<HTMLDivElement, MainProps>(
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
     const render: renderObject = {
-      priceView: <EmbeddedTable />,
+      priceView: <TicketTable />,
       subscribe: <SendinblueForm />,
     };
 

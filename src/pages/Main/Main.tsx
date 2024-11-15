@@ -1,15 +1,16 @@
-import { lazy, Suspense, forwardRef } from "react";
+import { lazy, Suspense, forwardRef, useState } from "react";
 import lowerLevelImage from "../../assets/Warriors section 109.png";
 import Loading from "./Loading";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ImageModal from "./Modals/ImageModal";
 
 const EmbeddedTable = lazy(() => import("./Ads/EmbeddedTable"));
 const SendinblueForm = lazy(() => import("./ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
   page: {
-    margin: "5% 5% 25%",
+    margin: "5% 5%",
   },
   buttonsContainer: {
     display: "flex",
@@ -22,7 +23,7 @@ const inlineStyle = {
   },
   imageButton: {
     cursor: "pointer",
-    width: "55vw",
+    width: "50vw",
     background: "none",
     border: "none",
     boxShadow: "2px",
@@ -45,6 +46,8 @@ export const Main = forwardRef<HTMLDivElement, MainProps>(
       [key: string]: JSX.Element;
     };
 
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
     const render: renderObject = {
       priceView: <EmbeddedTable />,
       subscribe: <SendinblueForm />,
@@ -59,11 +62,17 @@ export const Main = forwardRef<HTMLDivElement, MainProps>(
 
     return (
       <div style={inlineStyle.page}>
+        <ImageModal
+          open={isImageModalOpen}
+          handleClose={() => setIsImageModalOpen(false)}
+          imageSrc={lowerLevelImage}
+        />
         <div style={inlineStyle.buttonsContainer}>
           <div style={inlineStyle.section as React.CSSProperties}>
             <button
               onClick={() => {
                 setPage("priceView");
+                setIsImageModalOpen(true);
               }}
               style={inlineStyle.imageButton}
             >

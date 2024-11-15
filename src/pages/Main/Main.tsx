@@ -71,6 +71,7 @@ export const Main = forwardRef<HTMLDivElement, MainProps>(
         />
         <div style={inlineStyle.buttonsContainer}>
           <div style={inlineStyle.section as React.CSSProperties}>
+            <h4>View from Section 109, row 10</h4>
             <button
               onClick={() => {
                 setPage("priceView");
@@ -84,7 +85,6 @@ export const Main = forwardRef<HTMLDivElement, MainProps>(
                 style={inlineStyle.image}
               />
             </button>
-            <h4>View from Section 109, row 10</h4>
           </div>
         </div>
         <div>

@@ -1,12 +1,12 @@
 import { lazy, Suspense, forwardRef, useState } from "react";
 import lowerLevelImage from "../../assets/Warriors section 109.png";
-import Loading from "./Loading";
+import Loading from "../Loading/Loading";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import ImageModal from "./Modals/ImageModal";
+import ImageModal from "../Modals/ImageModal";
 
-const EmbeddedTable = lazy(() => import("./Ads/EmbeddedTable"));
-const SendinblueForm = lazy(() => import("./ListServe/SendinblueEmbedForm"));
+const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
+const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
 
 const inlineStyle = {
   page: {

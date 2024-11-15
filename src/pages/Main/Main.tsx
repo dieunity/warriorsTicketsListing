@@ -96,10 +96,16 @@ export const Main = forwardRef<HTMLDivElement, MainProps>(
               aria-label="subscribeOrPriceView"
               className="toggle-group"
             >
-              <ToggleButton value="priceView" aria-label="priceView">
+              <ToggleButton
+                value="priceView"
+                aria-label="see available tickets price table view"
+              >
                 See available tickets price
               </ToggleButton>
-              <ToggleButton value="subscribe" aria-label="subscribe">
+              <ToggleButton
+                value="subscribe"
+                aria-label="subscribe to email listserv view"
+              >
                 subscribe to email listserve
               </ToggleButton>
             </ToggleButtonGroup>

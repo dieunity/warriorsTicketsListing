@@ -8,26 +8,31 @@ type Props = {
 };
 
 const style = {
+  modalContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "fixed" as const,
+    top: 0,
+    left: 0,
+    width: "100vw",
+    bgcolor: "rgba(0, 0, 0, 0.5)",
+  },
   modal: {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "70vw",
-    height: "72vh",
+    position: "fixed" as const,
+    width: "75vw",
     border: "none",
     boxShadow: 24,
     p: 1,
   },
   image: {
-    maxHeight: "80vh",
     width: "100%",
   },
 };
 
 const ImageModal = ({ open, handleClose, imageSrc }: Props) => {
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleClose} sx={style.modalContainer}>
       <Box onClick={handleClose} sx={style.modal}>
         <img src={imageSrc} alt="largeImageRender" style={style.image} />
       </Box>

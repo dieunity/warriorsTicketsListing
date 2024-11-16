@@ -2,9 +2,9 @@ import "./styles.css";
 import { Main } from "./pages/Main/Main";
 import warriors2024 from "./assets/warriors2024-2025.jpg";
 import { useRef, useState } from "react";
-import { Fab } from "@mui/material";
-import NavigationIcon from "@mui/icons-material/Navigation";
+import { Fab, Link } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
+import { useTheme } from "@mui/material/styles";
 
 export default function App() {
   const ref = useRef<null | HTMLDivElement>(null);
@@ -19,6 +19,8 @@ export default function App() {
     handleScroll();
   };
 
+  const theme = useTheme();
+
   const style = {
     image: {
       height: "auto",
@@ -29,8 +31,6 @@ export default function App() {
       position: "fixed",
       bottom: "2em",
       right: "10%",
-      color: "blue",
-      backgroundColor: "yellow",
     },
   };
   return (
@@ -76,9 +76,9 @@ export default function App() {
       <Main ref={ref} page={page} setPage={setPage} />
       <Fab variant="extended" sx={{ ...style.fabStyle }}>
         <MailIcon sx={{ mr: 1 }} />
-        <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
+        <Link href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
           Contact Me
-        </a>
+        </Link>
       </Fab>
     </div>
   );

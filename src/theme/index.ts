@@ -1,18 +1,25 @@
 import { createTheme } from "@mui/material/styles";
 
+export const colors = {
+  darkBlue: "#1D428A",
+  lightYellow: "#FFE900",
+  darkYellow: "#FFC72C",
+  white: "#FFFFFF",
+};
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1D428A", // Dark blue
+      main: colors.darkBlue,
     },
     secondary: {
-      main: "#FFE900", // Lighter yellow
+      main: colors.lightYellow,
     },
     warning: {
-      main: "#FFC72C", // Darker yellow
+      main: colors.darkYellow,
     },
     background: {
-      default: "#FFFFFF",
+      default: colors.white,
     },
   },
   components: {
@@ -21,7 +28,7 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           "&:hover": {
-            backgroundColor: "#FFC72C",
+            backgroundColor: colors.darkYellow,
           },
         },
       },
@@ -29,9 +36,27 @@ const theme = createTheme({
     MuiTableHead: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1D428A",
+          backgroundColor: colors.darkBlue,
           "& th": {
-            color: "#FFFFFF",
+            color: colors.white,
+          },
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.darkBlue, // Background of the button
+          color: colors.white, // Text/icon color
+          "& a": {
+            color: "inherit",
+          },
+          "&:hover": {
+            backgroundColor: colors.lightYellow, // Hover background color
+            color: colors.darkBlue, // Hover text/icon color
+            "& a": {
+              color: "inherit",
+            },
           },
         },
       },

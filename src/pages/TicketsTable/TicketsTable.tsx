@@ -148,7 +148,7 @@ const TicketTable = () => {
             disabled={selectedTickets.length === 0} // Disable button if no tickets are selected
             style={{ marginTop: "20px" }}
           >
-            Email Selected Tickets
+            Request Selected Tickets
           </Button>
         </>
       )}

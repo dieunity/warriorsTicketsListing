@@ -1,120 +1,85 @@
-import { lazy, Suspense, forwardRef, useState } from "react";
-import lowerLevelImage from "../../assets/Warriors section 109.png";
-import Loading from "../../components/Loading/Loading";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import ImageModal from "../Modals/ImageModal";
+import "../../styles.css";
+import warriors2024 from "../../assets/warriors2024-2025.jpg";
+import { useRef, useState } from "react";
+import { Fab, Link } from "@mui/material";
+import MailIcon from "@mui/icons-material/Mail";
+import { useTheme } from "@mui/material/styles";
+import { TicketsAndUpdates } from "../TicketsAndUpdates/TicketsAndUpdates";
 
-const EmbeddedTable = lazy(() => import("../Ads/EmbeddedTable"));
-const TicketTable = lazy(() => import("../TicketsTable/TicketsTable"));
+export default function Main() {
+  const ref = useRef<null | HTMLDivElement>(null);
+  const [page, setPage] = useState("priceView");
 
-const SendinblueForm = lazy(() => import("../ListServe/SendinblueEmbedForm"));
+  const handleScroll = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-const inlineStyle = {
-  page: {
-    margin: "5% 5%",
-  },
-  buttonsContainer: {
-    display: "flex",
-    gap: "5%",
-    justifyContent: "center",
-  },
-  section: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  imageButton: {
-    cursor: "pointer",
-    width: "50vw",
-    background: "none",
-    border: "none",
-    boxShadow: "2px",
-  },
-  image: {
-    padding: 0,
-    width: "100%",
-    height: "100%",
-  },
-};
+  const handleSubscribe = () => {
+    setPage("subscribe");
+    handleScroll();
+  };
 
-type MainProps = {
-  page: string;
-  setPage: React.Dispatch<React.SetStateAction<string>>;
-};
+  const theme = useTheme();
 
-export const Main = forwardRef<HTMLDivElement, MainProps>(
-  ({ page, setPage }, ref) => {
-    type renderObject = {
-      [key: string]: JSX.Element;
-    };
-
-    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-
-    const render: renderObject = {
-      priceView: <TicketTable />,
-      subscribe: <SendinblueForm />,
-    };
-
-    const handlePageChange = (
-      event: React.MouseEvent<HTMLElement>,
-      newPage: string
-    ) => {
-      setPage(newPage);
-    };
-
-    return (
-      <div style={inlineStyle.page}>
-        <ImageModal
-          open={isImageModalOpen}
-          handleClose={() => setIsImageModalOpen(false)}
-          imageSrc={lowerLevelImage}
-        />
-        <div style={inlineStyle.buttonsContainer}>
-          <div style={inlineStyle.section as React.CSSProperties}>
-            <h4>View from Section 109, row 10</h4>
-            <button
-              onClick={() => {
-                setPage("priceView");
-                setIsImageModalOpen(true);
-              }}
-              style={inlineStyle.imageButton}
-            >
-              <img
-                src={lowerLevelImage}
-                alt="Section 109 3D render"
-                style={inlineStyle.image}
-              />
-            </button>
-          </div>
-        </div>
-        <div>
-          <div ref={ref}>
-            <ToggleButtonGroup
-              value={page}
-              exclusive
-              onChange={handlePageChange}
-              aria-label="subscribeOrPriceView"
-              className="toggle-group"
-            >
-              <ToggleButton
-                value="priceView"
-                aria-label="see available tickets price table view"
-              >
-                See available tickets price
-              </ToggleButton>
-              <ToggleButton
-                value="subscribe"
-                aria-label="subscribe to email listserv view"
-              >
-                subscribe to email listserve
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </div>
-        </div>
-        <Suspense fallback={<Loading />}>
-          <div>{render[page]}</div>
-        </Suspense>
-      </div>
-    );
-  }
-);
+  const style = {
+    image: {
+      height: "auto",
+      width: "100%",
+      cursor: "pointer",
+    },
+    fabStyle: {
+      position: "fixed",
+      bottom: "2em",
+      right: "10%",
+    },
+  };
+  return (
+    <div className="App">
+      <img
+        style={style.image}
+        src={warriors2024}
+        alt="Warriors championship banner"
+        onClick={handleScroll}
+      />
+      <h1>Warriors 2024-2025! We da Championship!</h1>
+      <p className="paragraph">
+        Since 2011, I've put up tickets for sale to Warriors fans who want an
+        affordable, awesome Warriors experience first at Oracle Arena, and now
+        at Chase Center. I've followed the rise of the Warriors dynastic core,
+        from when David Lee went down and Draymond got his first chance to
+        start, to when Iggy and KD both decided to join the up and coming
+        Warriors. What an era.
+      </p>
+      <p className="paragraph">
+        All in all, the Dubs took home the 4th championship out of 6 Finals
+        appearances in 8 years. Klay's now in a Mavs uniform, KD on the Suns,
+        Iggy onto brighter business ventures. The Warriors with new GM Mike
+        Dunleavy have made many underrated moves that is bringing them back to
+        the Western Conference! With Steph, Draymond, Loon locked into contracts
+        for a few more years, and with the rest of the team, the Warriors are
+        now a force to be reckoned with.
+      </p>
+      <p className="paragraph">
+        Email me at{" "}
+        <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
+          dieuhhuynh@gmail.com
+        </a>
+        , or text me directly if you have my number to get your tickets! I have 3 tickets in section 109, row 10, and I can't make every game, so would love for fellow Dubnation fans to go!
+      </p>
+      <p className="paragraph">
+        Feel free to browse the tickets available below, or{" "}
+        <button onClick={handleSubscribe} className="button-as-link">
+          subscribe
+        </button>{" "}
+        to my listserv for updates (like when playoffs come around!)
+      </p>
+      <TicketsAndUpdates ref={ref} page={page} setPage={setPage} />
+      <Fab variant="extended" sx={{ ...style.fabStyle }}>
+        <MailIcon sx={{ mr: 1 }} />
+        <Link href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
+          Contact Me
+        </Link>
+      </Fab>
+    </div>
+  );
+}

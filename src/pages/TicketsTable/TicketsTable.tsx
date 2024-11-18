@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../services/supabaseClient";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
 import { formatDate, formatTime } from "../../utils/dayjs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Checkbox,
+  Button,
+  Toolbar,
+} from "@mui/material";
 
 interface Data {
   owner: string;
@@ -81,21 +84,26 @@ const TicketTable = () => {
         Price is per ticket. I have 3 tickets available at section 109, row 10
       </Typography>
 
-      {/* Filter Button */}
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginBottom: "20px" }}
-        onClick={() => setShowAvailableOnly((prev) => !prev)} // Toggle filter
-      >
-        {showAvailableOnly ? "Show All Tickets" : "Show Available Tickets"}
-      </Button>
 
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (
         <>
           <TableContainer component={Paper}>
+            {/* Toolbar */}
+            <Toolbar style={{ justifyContent: "space-between" }}>
+              <Typography variant="h6">Filter Tickets</Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setShowAvailableOnly((prev) => !prev)}
+              >
+                {showAvailableOnly
+                  ? "Show All Tickets"
+                  : "Show Available Tickets"}
+              </Button>
+            </Toolbar>
+
             <Table>
               <TableHead>
                 <TableRow>

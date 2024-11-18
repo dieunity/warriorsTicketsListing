@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { formatDate, formatTime } from "../../utils/dayjs";
 
 interface Data {
+  owner: string;
   date: any;
   time: string | null;
   opponent: string;
@@ -25,7 +26,7 @@ const TicketTable = () => {
   const fetchTickets = async () => {
     const { data, error } = await supabase
       .from("tickets")
-      .select("date, time, opponent, price, is_sold")
+      .select("date, time, opponent, price, is_sold, owner")
       .order("date", { ascending: true });
     if (error) {
       console.error("Error fetching tickets:", error);
@@ -59,7 +60,6 @@ const TicketTable = () => {
                 <TableCell>Time</TableCell>
                 <TableCell>Opponent</TableCell>
                 <TableCell>Price</TableCell>
-                <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -68,8 +68,12 @@ const TicketTable = () => {
                   <TableRow
                     key={index}
                     sx={{
-                      backgroundColor: ticket.is_sold ? "grey.200" : "white",
-                      opacity: ticket.is_sold ? 0.6 : 1,
+                      backgroundColor:
+                        ticket.is_sold || ticket.owner === "KA"
+                          ? "grey.200"
+                          : "white",
+                      opacity:
+                        ticket.is_sold || ticket.owner === "KA" ? 0.7 : 1,
                     }}
                   >
                     <TableCell>{formatDate(ticket.date)}</TableCell>
@@ -77,9 +81,10 @@ const TicketTable = () => {
                       {ticket.time ? formatTime(ticket.time) : "TBD"}
                     </TableCell>
                     <TableCell>{ticket.opponent}</TableCell>
-                    <TableCell>${ticket.price}</TableCell>
                     <TableCell>
-                      {ticket.is_sold ? "Sold" : "Available"}
+                      {ticket.is_sold || ticket.owner === "KA"
+                        ? "Sold"
+                        : `$${ticket.price} / tix`}
                     </TableCell>
                   </TableRow>
                 );

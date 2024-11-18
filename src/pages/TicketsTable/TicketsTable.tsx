@@ -25,6 +25,7 @@ const TicketTable = () => {
   const [tickets, setTickets] = useState<Data[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTickets, setSelectedTickets] = useState<number[]>([]); // Track selected ticket indices
+  const [showAvailableOnly, setShowAvailableOnly] = useState(true); // State for filtering
 
   const fetchTickets = async () => {
     const { data, error } = await supabase
@@ -67,6 +68,10 @@ const TicketTable = () => {
 
   const emailLink = `mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request&body=${generateEmailBody()}`;
 
+  const filteredTickets = showAvailableOnly
+    ? tickets.filter((ticket) => !ticket.is_sold && ticket.owner !== "KA")
+    : tickets;
+
   return (
     <div style={{ padding: "20px" }}>
       <Typography variant="h4" gutterBottom>
@@ -75,6 +80,16 @@ const TicketTable = () => {
       <Typography variant="subtitle1" gutterBottom>
         Price is per ticket. I have 3 tickets available at section 109, row 10
       </Typography>
+
+      {/* Filter Button */}
+      <Button
+        variant="contained"
+        color="primary"
+        style={{ marginBottom: "20px" }}
+        onClick={() => setShowAvailableOnly((prev) => !prev)} // Toggle filter
+      >
+        {showAvailableOnly ? "Show All Tickets" : "Show Available Tickets"}
+      </Button>
 
       {loading ? (
         <Typography>Loading...</Typography>
@@ -92,7 +107,7 @@ const TicketTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {tickets.map((ticket, index) => (
+                {filteredTickets.map((ticket, index) => (
                   <TableRow
                     key={index}
                     sx={{

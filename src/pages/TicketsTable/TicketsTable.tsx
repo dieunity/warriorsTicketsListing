@@ -10,14 +10,13 @@ import {
   TableRow,
   Paper,
   Typography,
-  Checkbox,
   Button,
   Toolbar,
-  IconButton,
-  Tooltip,
 } from "@mui/material";
+import TicketsRow from "./TicketsRow";
 
-interface Data {
+export interface TicketData {
+  id: number;
   date: string;
   time: string | null;
   opponent: string;
@@ -28,10 +27,9 @@ interface Data {
 }
 
 const TicketTable = () => {
-  const [tickets, setTickets] = useState<Data[]>([]);
+  const [tickets, setTickets] = useState<TicketData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [promoTooltipOpen, setPromoTooltipOpen] = useState(false);
-  const [selectedTickets, setSelectedTickets] = useState<number[]>([]); // Track selected ticket indices
+  const [selectedTickets, setSelectedTickets] = useState<number[]>([]); // Track selected ticket Ids
   const [showAvailableOnly, setShowAvailableOnly] = useState(true); // State for filtering
 
   const fetchTickets = async () => {
@@ -39,13 +37,13 @@ const TicketTable = () => {
     const { data, error } = await supabase
       .from("tickets")
       .select(
-        "date, time, opponent, price, promotional_night, promotional_night_details, for_sale"
+        "id, date, time, opponent, price, promotional_night, promotional_night_details, for_sale"
       )
       .order("date", { ascending: true });
     if (error) {
       console.error("Error fetching tickets:", error);
     } else {
-      setTickets((data as any as Data[]) ?? []);
+      setTickets((data as any as TicketData[]) ?? []);
     }
     setLoading(false);
   };
@@ -54,12 +52,12 @@ const TicketTable = () => {
     fetchTickets();
   }, []);
 
-  const handleSelectTicket = (index: number) => {
+  const handleSelectTicket = (ticketsId: number) => {
     setSelectedTickets(
       (prev) =>
-        prev.includes(index)
-          ? prev.filter((i) => i !== index) // Remove if already selected
-          : [...prev, index] // Add if not selected
+        prev.includes(ticketsId)
+          ? prev.filter((i) => i !== ticketsId) // Remove if already selected
+          : [...prev, ticketsId] // Add if not selected
     );
   };
 
@@ -122,60 +120,7 @@ const TicketTable = () => {
               </TableHead>
               <TableBody>
                 {filteredTickets.map((ticket, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{
-                      backgroundColor: ticket.for_sale ? "white" : "grey.200",
-                      opacity: ticket.for_sale ? 1 : 0.7,
-                      "&:hover": {
-                        backgroundColor: "lightgray", // Add hover effect
-                      },
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      if (ticket.for_sale) {
-                        handleSelectTicket(index); // Toggle selection only for available rows
-                      }
-                    }}
-                  >
-                    <TableCell>
-                      <Checkbox
-                        checked={selectedTickets.includes(index)}
-                        disabled={!ticket.for_sale}
-                      />
-                    </TableCell>
-                    <TableCell>{formatDate(ticket.date)}</TableCell>
-                    <TableCell>
-                      {ticket.time ? formatTime(ticket.time) : "TBD"}
-                    </TableCell>
-                    <TableCell>{ticket.opponent}</TableCell>
-                    <TableCell
-                      sx={{
-                        color: ticket.for_sale ? "black" : "red",
-                      }}
-                    >
-                      {ticket.for_sale ? `$${ticket.price} / tix` : "Sold"}
-                      {ticket.promotional_night && (
-                        <Tooltip
-                          title={ticket.promotional_night_details}
-                          enterDelay={0}
-                          open={promoTooltipOpen}
-                          onOpen={() => setPromoTooltipOpen(true)}
-                          onClose={() => setPromoTooltipOpen(false)}
-                        >
-                          <IconButton
-                            aria-label="trash"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setPromoTooltipOpen(true);
-                            }}
-                          >
-                            🎁
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </TableCell>
-                  </TableRow>
+                  <TicketsRow ticket={ticket} key={index} handleSelectTicket={handleSelectTicket} selectedTickets={selectedTickets}/>
                 ))}
               </TableBody>
             </Table>

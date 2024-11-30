@@ -31,6 +31,7 @@ interface Data {
 const TicketTable = () => {
   const [tickets, setTickets] = useState<Data[]>([]);
   const [loading, setLoading] = useState(true);
+  const [promoTooltipOpen, setPromoTooltipOpen] = useState(false);
   const [selectedTickets, setSelectedTickets] = useState<number[]>([]); // Track selected ticket indices
   const [showAvailableOnly, setShowAvailableOnly] = useState(true); // State for filtering
 
@@ -168,12 +169,15 @@ const TicketTable = () => {
                         <Tooltip
                           title={ticket.promotional_night_details}
                           enterDelay={0}
+                          open={promoTooltipOpen}
+                          onOpen={() => setPromoTooltipOpen(true)}
+                          onClose={() => setPromoTooltipOpen(false)}
                         >
                           <IconButton
                             aria-label="trash"
                             onClick={(e) => {
                               e.stopPropagation();
-                              console.log("click");
+                              setPromoTooltipOpen(true);
                             }}
                           >
                             🎁

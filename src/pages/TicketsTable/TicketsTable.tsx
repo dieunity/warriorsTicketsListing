@@ -13,15 +13,19 @@ import {
   Checkbox,
   Button,
   Toolbar,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 
 interface Data {
-  owner: string;
-  date: any;
+  date: string;
   time: string | null;
   opponent: string;
-  price: any;
+  price: number;
   is_sold: boolean;
+  owner: string;
+  promotional_night: boolean;
+  promotional_night_details: string;
 }
 
 const TicketTable = () => {
@@ -31,14 +35,17 @@ const TicketTable = () => {
   const [showAvailableOnly, setShowAvailableOnly] = useState(true); // State for filtering
 
   const fetchTickets = async () => {
+    // @ts-ignore: Ignoring type errors temporarily
     const { data, error } = await supabase
       .from("tickets")
-      .select("date, time, opponent, price, is_sold, owner")
+      .select(
+        "date, time, opponent, price, is_sold, owner, promotional_night, promotional_night_details"
+      )
       .order("date", { ascending: true });
     if (error) {
       console.error("Error fetching tickets:", error);
     } else {
-      setTickets(data ?? []);
+      setTickets((data as any as Data[]) ?? []);
     }
     setLoading(false);
   };
@@ -83,7 +90,6 @@ const TicketTable = () => {
       <Typography variant="subtitle1" gutterBottom>
         Price is per ticket. I have 3 tickets available at section 109, row 10
       </Typography>
-
 
       {loading ? (
         <Typography>Loading...</Typography>
@@ -158,6 +164,22 @@ const TicketTable = () => {
                       {ticket.is_sold || ticket.owner === "KA"
                         ? "Sold"
                         : `$${ticket.price} / tix`}
+                      {ticket.promotional_night && (
+                        <Tooltip
+                          title={ticket.promotional_night_details}
+                          enterDelay={0}
+                        >
+                          <IconButton
+                            aria-label="trash"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log("click");
+                            }}
+                          >
+                            🎁
+                          </IconButton>
+                        </Tooltip>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

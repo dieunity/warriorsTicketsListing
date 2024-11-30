@@ -22,10 +22,9 @@ interface Data {
   time: string | null;
   opponent: string;
   price: number;
-  is_sold: boolean;
-  owner: string;
   promotional_night: boolean;
   promotional_night_details: string;
+  for_sale: boolean;
 }
 
 const TicketTable = () => {
@@ -40,7 +39,7 @@ const TicketTable = () => {
     const { data, error } = await supabase
       .from("tickets")
       .select(
-        "date, time, opponent, price, is_sold, owner, promotional_night, promotional_night_details"
+        "date, time, opponent, price, promotional_night, promotional_night_details, for_sale"
       )
       .order("date", { ascending: true });
     if (error) {
@@ -80,7 +79,7 @@ const TicketTable = () => {
   const emailLink = `mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request&body=${generateEmailBody()}`;
 
   const filteredTickets = showAvailableOnly
-    ? tickets.filter((ticket) => !ticket.is_sold && ticket.owner !== "KA")
+    ? tickets.filter((ticket) => ticket.for_sale)
     : tickets;
 
   return (
@@ -126,19 +125,15 @@ const TicketTable = () => {
                   <TableRow
                     key={index}
                     sx={{
-                      backgroundColor:
-                        ticket.is_sold || ticket.owner === "KA"
-                          ? "grey.200"
-                          : "white",
-                      opacity:
-                        ticket.is_sold || ticket.owner === "KA" ? 0.7 : 1,
+                      backgroundColor: ticket.for_sale ? "white" : "grey.200",
+                      opacity: ticket.for_sale ? 1 : 0.7,
                       "&:hover": {
                         backgroundColor: "lightgray", // Add hover effect
                       },
                       cursor: "pointer",
                     }}
                     onClick={() => {
-                      if (!(ticket.is_sold || ticket.owner === "KA")) {
+                      if (ticket.for_sale) {
                         handleSelectTicket(index); // Toggle selection only for available rows
                       }
                     }}
@@ -146,7 +141,7 @@ const TicketTable = () => {
                     <TableCell>
                       <Checkbox
                         checked={selectedTickets.includes(index)}
-                        disabled={ticket.is_sold || ticket.owner === "KA"}
+                        disabled={!ticket.for_sale}
                       />
                     </TableCell>
                     <TableCell>{formatDate(ticket.date)}</TableCell>
@@ -156,15 +151,10 @@ const TicketTable = () => {
                     <TableCell>{ticket.opponent}</TableCell>
                     <TableCell
                       sx={{
-                        color:
-                          ticket.is_sold || ticket.owner === "KA"
-                            ? "red"
-                            : "black",
+                        color: ticket.for_sale ? "black" : "red",
                       }}
                     >
-                      {ticket.is_sold || ticket.owner === "KA"
-                        ? "Sold"
-                        : `$${ticket.price} / tix`}
+                      {ticket.for_sale ? `$${ticket.price} / tix` : "Sold"}
                       {ticket.promotional_night && (
                         <Tooltip
                           title={ticket.promotional_night_details}

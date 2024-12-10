@@ -94,7 +94,6 @@ const TicketTable = () => {
       ) : (
         <>
           <TableContainer component={Paper}>
-            {/* Toolbar */}
             <Toolbar style={{ justifyContent: "space-between" }}>
               <Typography variant="h6">Filter Tickets</Typography>
               <Button

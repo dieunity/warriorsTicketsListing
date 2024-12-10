@@ -5,6 +5,7 @@ import { Fab, Link } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
 import { TicketsAndUpdates } from "../TicketsAndUpdates/TicketsAndUpdates";
+import SpotifyPlaylist from "../SpotifyEmbed/SpotifyEmbed";
 
 export default function Main() {
   const ref = useRef<null | HTMLDivElement>(null);
@@ -64,7 +65,9 @@ export default function Main() {
         <a href="mailto:dieuhhuynh@gmail.com?subject=Warriors%20Tix%20Request%20">
           dieuhhuynh@gmail.com
         </a>
-        , or text me directly if you have my number to get your tickets! I have 3 tickets in section 109, row 10, and I can't make every game, so would love for fellow Dubnation fans to go!
+        , or text me directly if you have my number to get your tickets! I have
+        3 tickets in section 109, row 10, and I can't make every game, so would
+        love for fellow Dubnation fans to go!
       </p>
       <p className="paragraph">
         Feel free to browse the tickets available below, or{" "}
@@ -80,6 +83,11 @@ export default function Main() {
           Contact Me
         </Link>
       </Fab>
+      <SpotifyPlaylist
+        playlistUrl={
+          "https://open.spotify.com/embed/playlist/4l1yjXTVqzkupTYzt5moUT?utm_source=generator"
+        }
+      />
     </div>
   );
 }

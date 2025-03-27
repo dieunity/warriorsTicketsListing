@@ -1,5 +1,4 @@
 import "../../styles.css";
-import warriors2024 from "../../assets/warriors2024-2025.jpg";
 import chefAndButler from "../../assets/Chef cooks Butler serves.png";
 import { useRef, useState } from "react";
 import { Fab, Link } from "@mui/material";

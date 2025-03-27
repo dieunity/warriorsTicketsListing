@@ -6,6 +6,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
 import { TicketsAndUpdates } from "../TicketsAndUpdates/TicketsAndUpdates";
 import SpotifyPlaylist from "../SpotifyEmbed/SpotifyEmbed";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Main() {
   const ref = useRef<null | HTMLDivElement>(null);
@@ -88,6 +89,7 @@ export default function Main() {
           "https://open.spotify.com/embed/playlist/4l1yjXTVqzkupTYzt5moUT?utm_source=generator"
         }
       />
+      <Analytics />
     </div>
   );
 }

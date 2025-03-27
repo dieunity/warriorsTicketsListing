@@ -1,5 +1,6 @@
 import "../../styles.css";
 import warriors2024 from "../../assets/warriors2024-2025.jpg";
+import chefAndButler from "../../assets/Chef cooks Butler serves.png";
 import { useRef, useState } from "react";
 import { Fab, Link } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
@@ -39,8 +40,8 @@ export default function Main() {
     <div className="App">
       <img
         style={style.image}
-        src={warriors2024}
-        alt="Warriors championship banner"
+        src={chefAndButler}
+        alt="cartoon drawing by LuckyMong of Steph Curry as chef handing a W to Jimmy Butler"
         onClick={handleScroll}
       />
       <h1>Warriors 2024-2025! We da Championship!</h1>

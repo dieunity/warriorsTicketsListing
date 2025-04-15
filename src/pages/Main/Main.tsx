@@ -1,12 +1,13 @@
 import "../../styles.css";
 import chefAndButler from "../../assets/Chef cooks Butler serves.png";
 import { useRef, useState } from "react";
-import { Fab, Link } from "@mui/material";
+import { Fab, Link, Button } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import { useTheme } from "@mui/material/styles";
 import { TicketsAndUpdates } from "../TicketsAndUpdates/TicketsAndUpdates";
 import SpotifyPlaylist from "../SpotifyEmbed/SpotifyEmbed";
 import { Analytics } from "@vercel/analytics/react";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Main() {
   const ref = useRef<null | HTMLDivElement>(null);
@@ -33,6 +34,15 @@ export default function Main() {
       position: "fixed",
       bottom: "2em",
       right: "10%",
+    },
+    matrixButton: {
+      marginTop: "2em",
+      marginBottom: "2em",
+      backgroundColor: "#1D428A", // Warriors blue
+      "&:hover": {
+        backgroundColor: "#FFC72C", // Warriors gold
+        color: "#1D428A",
+      },
     },
   };
   return (
@@ -89,6 +99,14 @@ export default function Main() {
           "https://open.spotify.com/embed/playlist/4l1yjXTVqzkupTYzt5moUT?utm_source=generator"
         }
       />
+      <Button
+        component={RouterLink}
+        to="/matrix"
+        variant="contained"
+        sx={style.matrixButton}
+      >
+        Enter The Matrix
+      </Button>
       <Analytics />
     </div>
   );

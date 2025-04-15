@@ -37,7 +37,6 @@ export default function Main() {
     },
     matrixButton: {
       marginTop: "2em",
-      marginBottom: "2em",
       backgroundColor: "#1D428A", // Warriors blue
       "&:hover": {
         backgroundColor: "#FFC72C", // Warriors gold
